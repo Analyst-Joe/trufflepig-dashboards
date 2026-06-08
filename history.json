@@ -3348,5 +3348,485 @@
       }
     },
     "active_trips": 235
+  },
+  "2026-06-08": {
+    "week": "2026-06-08",
+    "coordinators": {
+      "katrina": {
+        "name": "Katrina Lee",
+        "status": "red",
+        "total": 18,
+        "planning": 5,
+        "confirming": 7,
+        "delivery": 6,
+        "confirmed": 0,
+        "incoming": 0,
+        "delsoon": 0,
+        "stalled": 5,
+        "closing": 0,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Meredith",
+            "a": 9,
+            "p": 16
+          },
+          {
+            "n": "Luisa",
+            "a": 13,
+            "p": 10
+          },
+          {
+            "n": "Clair",
+            "a": 9,
+            "p": 10
+          }
+        ],
+        "stepins": []
+      },
+      "partow": {
+        "name": "Partow Etemadi",
+        "status": "red",
+        "total": 22,
+        "planning": 2,
+        "confirming": 14,
+        "delivery": 6,
+        "confirmed": 0,
+        "incoming": 5,
+        "delsoon": 3,
+        "stalled": 6,
+        "closing": 2,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Anton",
+            "a": 22,
+            "p": 28
+          },
+          {
+            "n": "Clair",
+            "a": 6,
+            "p": 3
+          },
+          {
+            "n": "Tyler",
+            "a": 3,
+            "p": 3
+          }
+        ],
+        "stepins": [
+          {
+            "n": "Greg",
+            "a": 1
+          },
+          {
+            "n": "Luisa",
+            "a": 1
+          }
+        ]
+      },
+      "evan": {
+        "name": "Evan LaRocque",
+        "status": "red",
+        "total": 18,
+        "planning": 3,
+        "confirming": 1,
+        "delivery": 14,
+        "confirmed": 9,
+        "incoming": 10,
+        "delsoon": 1,
+        "stalled": 4,
+        "closing": 0,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Jacoline",
+            "a": 29,
+            "p": 35
+          }
+        ],
+        "stepins": [
+          {
+            "n": "Evan",
+            "a": 1
+          }
+        ]
+      },
+      "lucia": {
+        "name": "Lucia Duarte",
+        "status": "green",
+        "total": 7,
+        "planning": 3,
+        "confirming": 1,
+        "delivery": 3,
+        "confirmed": 10,
+        "incoming": 10,
+        "delsoon": 0,
+        "stalled": 4,
+        "closing": 2,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Lais",
+            "a": 8,
+            "p": 15
+          },
+          {
+            "n": "Goa",
+            "a": 8,
+            "p": 2
+          },
+          {
+            "n": "Anton",
+            "a": 3,
+            "p": 4
+          },
+          {
+            "n": "Irene",
+            "a": 5,
+            "p": 5
+          }
+        ],
+        "stepins": [
+          {
+            "n": "Victoria",
+            "a": 2
+          }
+        ]
+      },
+      "madie": {
+        "name": "Madeleine Agapito",
+        "status": "green",
+        "total": 5,
+        "planning": 2,
+        "confirming": 1,
+        "delivery": 2,
+        "confirmed": 4,
+        "incoming": 3,
+        "delsoon": 0,
+        "stalled": 1,
+        "closing": 1,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Alex",
+            "a": 17,
+            "p": 35
+          },
+          {
+            "n": "Dan",
+            "a": 10,
+            "p": 35
+          }
+        ],
+        "stepins": []
+      },
+      "juliet": {
+        "name": "Juliet Cameron",
+        "status": "amber",
+        "total": 12,
+        "planning": 3,
+        "confirming": 6,
+        "delivery": 3,
+        "confirmed": 3,
+        "incoming": 3,
+        "delsoon": 0,
+        "stalled": 1,
+        "closing": 0,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Sebastian",
+            "a": 15,
+            "p": 17
+          },
+          {
+            "n": "Claudia",
+            "a": 10,
+            "p": 8
+          },
+          {
+            "n": "Irene",
+            "a": 1,
+            "p": null
+          }
+        ],
+        "stepins": []
+      },
+      "jocelyn": {
+        "name": "Jocelyn Faulkner",
+        "status": "red",
+        "total": 14,
+        "planning": 2,
+        "confirming": 1,
+        "delivery": 11,
+        "confirmed": 19,
+        "incoming": 5,
+        "delsoon": 1,
+        "stalled": 5,
+        "closing": 33,
+        "closed": 0,
+        "modifier": "Delivery ≥ 8 — bumps status to At Capacity",
+        "planners": [
+          {
+            "n": "Yvonne",
+            "a": 15,
+            "p": 25
+          },
+          {
+            "n": "Dan",
+            "a": 15,
+            "p": 15
+          }
+        ],
+        "stepins": []
+      },
+      "manroop": {
+        "name": "Manroop Sidhu",
+        "status": "amber",
+        "total": 12,
+        "planning": 0,
+        "confirming": 8,
+        "delivery": 4,
+        "confirmed": 0,
+        "incoming": 0,
+        "delsoon": 0,
+        "stalled": 2,
+        "closing": 0,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Sebastian",
+            "a": 14,
+            "p": 20
+          },
+          {
+            "n": "Irene",
+            "a": 9,
+            "p": 20
+          }
+        ],
+        "stepins": []
+      },
+      "sydney": {
+        "name": "Sydney Preston",
+        "status": "green",
+        "total": 9,
+        "planning": 2,
+        "confirming": 4,
+        "delivery": 3,
+        "confirmed": 2,
+        "incoming": 1,
+        "delsoon": 1,
+        "stalled": 2,
+        "closing": 2,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Clair",
+            "a": 6,
+            "p": 15
+          },
+          {
+            "n": "Meredith",
+            "a": 8,
+            "p": 6
+          },
+          {
+            "n": "Luisa",
+            "a": 6,
+            "p": 12
+          },
+          {
+            "n": "Irene",
+            "a": 1,
+            "p": null
+          }
+        ],
+        "stepins": []
+      },
+      "alexa": {
+        "name": "Alexa Woods",
+        "status": "red",
+        "total": 17,
+        "planning": 2,
+        "confirming": 7,
+        "delivery": 8,
+        "confirmed": 0,
+        "incoming": 3,
+        "delsoon": 0,
+        "stalled": 4,
+        "closing": 10,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Amy",
+            "a": 11,
+            "p": 19
+          },
+          {
+            "n": "Michael",
+            "a": 11,
+            "p": 13
+          }
+        ],
+        "stepins": [
+          {
+            "n": "Claudia",
+            "a": 1
+          }
+        ]
+      },
+      "habiba": {
+        "name": "Habiba Eldah",
+        "status": "amber",
+        "total": 14,
+        "planning": 4,
+        "confirming": 4,
+        "delivery": 6,
+        "confirmed": 6,
+        "incoming": 4,
+        "delsoon": 2,
+        "stalled": 6,
+        "closing": 0,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Claudia",
+            "a": 19,
+            "p": 28
+          },
+          {
+            "n": "Luisa",
+            "a": 6,
+            "p": 10
+          }
+        ],
+        "stepins": [
+          {
+            "n": "Meredith",
+            "a": 3
+          },
+          {
+            "n": "Lais",
+            "a": 1
+          }
+        ]
+      },
+      "emilie": {
+        "name": "Emilie Bell-Perrais",
+        "status": "green",
+        "total": 9,
+        "planning": 1,
+        "confirming": 2,
+        "delivery": 6,
+        "confirmed": 1,
+        "incoming": 3,
+        "delsoon": 0,
+        "stalled": 2,
+        "closing": 3,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Alex",
+            "a": 8,
+            "p": null
+          },
+          {
+            "n": "Michael",
+            "a": 6,
+            "p": 15
+          }
+        ],
+        "stepins": [
+          {
+            "n": "Clair",
+            "a": 1
+          }
+        ]
+      },
+      "jade": {
+        "name": "Jade Perelmuter",
+        "status": "green",
+        "total": 6,
+        "planning": 2,
+        "confirming": 3,
+        "delivery": 1,
+        "confirmed": 6,
+        "incoming": 5,
+        "delsoon": 1,
+        "stalled": 1,
+        "closing": 3,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Tyler",
+            "a": 14,
+            "p": 14
+          },
+          {
+            "n": "Goa",
+            "a": 4,
+            "p": 6
+          }
+        ],
+        "stepins": []
+      },
+      "viv": {
+        "name": "Viv Holliday",
+        "status": "green",
+        "total": 5,
+        "planning": 3,
+        "confirming": 2,
+        "delivery": 0,
+        "confirmed": 0,
+        "incoming": 3,
+        "delsoon": 1,
+        "stalled": 1,
+        "closing": 4,
+        "closed": 0,
+        "modifier": null,
+        "planners": [
+          {
+            "n": "Jack",
+            "a": 2,
+            "p": 5
+          },
+          {
+            "n": "Amy",
+            "a": 1,
+            "p": null
+          },
+          {
+            "n": "Anton",
+            "a": 1,
+            "p": null
+          }
+        ],
+        "stepins": [
+          {
+            "n": "Emilie",
+            "a": 1
+          },
+          {
+            "n": "Michael",
+            "a": 1
+          }
+        ]
+      }
+    },
+    "active_trips": 228
   }
 }
