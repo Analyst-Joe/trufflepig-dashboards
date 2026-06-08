@@ -35,6 +35,18 @@
   .week-label { font-size: 11px; color: #8a8e9b; }
   .settings-btn { width: 30px; height: 30px; border-radius: 6px; border: 1px solid #e6e9ef; background: #f8f9fa; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #8a8e9b; transition: all 0.12s; }
   .settings-btn:hover { background: #fff; border-color: #d0d4dc; color: #555; }
+  .tab-nav { display: flex; gap: 2px; margin-left: 16px; }
+  .tab-btn { padding: 4px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid transparent; background: transparent; color: #8a8e9b; transition: all 0.12s; user-select: none; }
+  .tab-btn:hover { background: #f0f2f6; color: #555; }
+  .tab-btn.active { background: #262730; color: #fff; border-color: #262730; }
+  .tab-panel { display: none; width: 100%; height: 100%; flex-direction: row; }
+  .tab-panel.active { display: flex; }
+  .requests-panel { flex: 1; overflow-y: auto; background: #f0f2f6; padding: 20px 24px; }
+  .req-card { background: #fff; border: 1px solid #e6e9ef; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; }
+  .req-headlines { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 10px; margin-bottom: 16px; }
+  .req-metric { background: #f8f9fa; border-radius: 8px; padding: 12px 14px; }
+  .req-metric-label { font-size: 11px; color: #8a8e9b; margin-bottom: 3px; }
+  .req-metric-value { font-size: 22px; font-weight: 700; color: #262730; }
   .main { display: flex; flex-direction: row; width: 100%; height: calc(100vh - 52px); overflow: hidden; }
   .list-panel { flex: 2; min-width: 0; display: flex; flex-direction: column; overflow: hidden; background: #fff; border-right: 1px solid #e6e9ef; }
   .list-header { padding: 10px 20px 8px; border-bottom: 1px solid #f0f2f6; display: grid; grid-template-columns: minmax(100px,1.2fr) 52px 52px 60px 52px 88px 60px 68px 68px; gap: 4px; align-items: center; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #bbb; flex-shrink: 0; }
@@ -219,8 +231,12 @@
 <body>
 <div class="topbar">
   <div class="topbar-left">
-    <div class="topbar-title"><span class="tp-dot"></span>Coordinator Capacity</div>
-    <div class="filter-pills">
+    <div class="topbar-title"><span class="tp-dot"></span>Trufflepig Ops</div>
+    <div class="tab-nav">
+      <div class="tab-btn active" onclick="switchTab('capacity',this)">Capacity</div>
+      <div class="tab-btn" onclick="switchTab('requests',this)">Requests</div>
+    </div>
+    <div class="filter-pills" id="capacityPills">
       <div class="pill active" data-filter="all" onclick="setFilter('all',this)">All 14</div>
       <div class="pill red" data-filter="red" onclick="setFilter('red',this)">🔴 At Capacity</div>
       <div class="pill amber" data-filter="amber" onclick="setFilter('amber',this)">🟡 Watch</div>
@@ -233,6 +249,7 @@
   </div>
 </div>
 <div class="main">
+<div class="tab-panel active" id="tab-capacity">
   <div class="list-panel" id="listPanel">
     <div class="list-header">
       <span>Coordinator</span>
@@ -401,6 +418,45 @@
     </div>
     <div class="side-content" id="sideContent"></div>
   </div>
+</div>
+</div>
+<div class="tab-panel" id="tab-requests">
+  <div class="requests-panel">
+    <div class="req-card">
+      <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;">
+        <span style="font-size:13px;font-weight:700;color:#262730;">Region:</span>
+        <select id="reqRegionSel" style="font-size:13px;padding:4px 8px;border:1px solid #e6e9ef;border-radius:6px;background:#fff;color:#262730;" onchange="buildReqChart(this.value)">
+          <option value="all">All regions</option>
+          <option value="Africa">Africa</option>
+          <option value="Asia">Asia</option>
+          <option value="Latin America">Latin America</option>
+          <option value="Spain / Portugal">Spain / Portugal</option>
+          <option value="Morocco">Morocco</option>
+          <option value="France">France</option>
+          <option value="Greece">Greece</option>
+          <option value="Italy">Italy</option>
+          <option value="Rest of Europe">Rest of Europe</option>
+        </select>
+        <span style="font-size:11px;color:#8a8e9b;">Trip Planning Services + Bookings Only</span>
+      </div>
+      <div class="req-headlines">
+        <div class="req-metric"><div class="req-metric-label">FY25 total</div><div class="req-metric-value" id="rh-fy25-total">—</div></div>
+        <div class="req-metric"><div class="req-metric-label">FY26 W1–W18</div><div class="req-metric-value" id="rh-fy26-ytd">—</div></div>
+        <div class="req-metric"><div class="req-metric-label">FY25 W1–W18</div><div class="req-metric-value" id="rh-fy25-ytd">—</div></div>
+        <div class="req-metric"><div class="req-metric-label">YTD vs prior year</div><div class="req-metric-value" id="rh-ytd-delta">—</div></div>
+        <div class="req-metric"><div class="req-metric-label">Avg lead time FY25</div><div class="req-metric-value" id="rh-lt25">—</div></div>
+        <div class="req-metric"><div class="req-metric-label">Avg lead time FY26</div><div class="req-metric-value" id="rh-lt26">—</div></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-bottom:8px;font-size:12px;color:#8a8e9b;flex-wrap:wrap;">
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:20px;height:2px;border-top:2px dashed #888780;display:inline-block;"></span>FY25</span>
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:20px;height:10px;background:#378ADD;display:inline-block;border-radius:2px;"></span>FY26</span>
+      </div>
+      <div style="position:relative;width:100%;height:320px;">
+        <canvas id="reqChart" role="img" aria-label="Weekly trip requests FY25 vs FY26 by region with month labels"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 <div class="settings-overlay" id="settingsOverlay" onclick="closeSettingsOnBackdrop(event)">
   <div class="settings-panel">
@@ -789,6 +845,119 @@ function setFilter(filter, el) {
 function toggleSettings() { document.getElementById('settingsOverlay').classList.toggle('show'); }
 function closeSettingsOnBackdrop(e) { if (e.target === document.getElementById('settingsOverlay')) toggleSettings(); }
 function updateThresholds() { document.getElementById('t-cap').value = parseInt(document.getElementById('t-watch').value)+1; }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const REQ_REGIONS = ['Africa','Asia','Latin America','Spain / Portugal','Morocco','France','Greece','Italy','Rest of Europe'];
+const REQ_COLORS  = {'Africa':'#1D9E75','Asia':'#7F77DD','Latin America':'#D85A30','Spain / Portugal':'#EF9F27','Morocco':'#D4537E','France':'#378ADD','Greece':'#5DCAA5','Italy':'#F09595','Rest of Europe':'#B4B2A9'};
+const RD25 = {
+  'Africa':          [4,2,5,1,1,0,1,0,2,2,3,3,1,1,2,1,1,4,1,3,4,4,0,1,2,1,3,0,5,1,1,2,5,3,4,1,6,3,0,0,3,7,3,2,2,2,0,0,4,4,1,8],
+  'Asia':            [2,4,1,7,2,4,2,7,3,1,2,7,4,4,3,2,1,2,0,3,3,0,1,6,2,7,3,3,4,5,2,8,2,3,3,5,3,3,1,2,3,3,5,2,4,3,1,0,2,3,4,6],
+  'Latin America':   [5,1,0,3,1,2,4,0,2,1,2,2,2,1,1,1,1,2,2,1,4,3,4,2,1,3,2,1,4,3,1,1,1,2,2,5,2,3,3,3,4,3,1,6,4,0,0,1,4,2,4,2],
+  'Spain / Portugal':[5,1,2,0,1,0,2,3,1,0,0,2,2,0,0,2,4,0,3,1,1,1,1,1,1,0,2,0,1,1,1,2,2,1,4,1,0,0,3,2,0,1,3,0,0,0,1,1,1,2,5,2],
+  'Morocco':         [1,0,0,0,1,1,2,1,0,2,0,1,0,0,0,0,1,1,1,1,0,0,1,0,2,0,0,1,1,1,0,0,0,1,0,0,1,0,0,1,0,2,2,1,1,2,0,0,0,1,3,0],
+  'France':          [2,4,4,3,1,3,6,1,2,0,3,2,0,2,2,0,1,4,1,1,5,1,3,4,1,3,3,3,3,4,4,0,3,1,1,1,0,1,1,1,1,1,1,1,0,1,2,0,4,4,3,0],
+  'Greece':          [1,3,4,1,5,0,6,2,1,2,2,4,0,3,0,2,2,1,3,1,0,1,1,3,2,0,1,0,1,1,2,2,0,1,2,2,0,2,0,3,1,1,2,4,4,1,1,1,2,2,5,4],
+  'Italy':           [6,3,7,3,4,4,2,2,6,3,6,2,5,1,2,6,2,0,2,0,6,7,5,1,5,1,3,4,3,2,4,1,3,2,1,4,2,2,2,6,1,4,2,2,0,2,0,0,4,1,5,2],
+  'Rest of Europe':  [6,3,9,4,2,4,4,5,3,1,2,6,1,5,2,4,4,6,6,2,8,2,4,5,3,1,4,1,2,3,2,4,3,1,3,6,2,5,2,3,1,0,6,6,5,2,0,0,5,5,4,2]
+};
+const RD26 = {
+  'Africa':          [5,4,3,6,2,2,2,0,2,0,2,4,1,2,0,0,2,2,0],
+  'Asia':            [7,6,2,1,2,5,1,4,3,2,2,2,0,0,1,4,3,2,0],
+  'Latin America':   [4,2,4,2,1,3,2,0,2,5,2,2,1,3,3,2,0,1,0],
+  'Spain / Portugal':[2,4,2,2,2,1,1,1,0,0,2,0,1,1,2,1,1,1,0],
+  'Morocco':         [0,0,1,0,0,0,2,1,0,2,0,1,1,1,1,0,0,0,1],
+  'France':          [2,2,3,4,1,1,1,5,1,2,2,9,3,1,2,0,0,1,0],
+  'Greece':          [3,3,1,3,0,2,2,0,2,4,0,0,2,2,1,0,0,3,0],
+  'Italy':           [2,8,1,3,5,2,4,2,3,2,1,1,0,0,4,3,4,2,1],
+  'Rest of Europe':  [11,2,6,4,2,5,2,5,4,1,3,4,1,1,2,6,4,3,0]
+};
+const RLT25 = {'Africa':9.2,'Asia':8.9,'Latin America':6.8,'Spain / Portugal':6.1,'Morocco':5.2,'France':6.4,'Greece':7.7,'Italy':6.3,'Rest of Europe':6.2,'all':7.1};
+const RLT26 = {'Africa':9.1,'Asia':7.9,'Latin America':7.3,'Spain / Portugal':5.5,'Morocco':6.2,'France':4.9,'Greece':6.7,'Italy':5.7,'Rest of Europe':5.6,'all':6.5};
+const MONTH_STARTS = {0:'Feb',4:'Mar',8:'Apr',13:'May',17:'Jun',21:'Jul',26:'Aug',30:'Sep',35:'Oct',39:'Nov',43:'Dec',48:'Jan'};
+
+let reqChart;
+
+function reqSumWeeks(data, regions, from, to) {
+  let t = 0;
+  for (let w = from; w <= to; w++) regions.forEach(r => { t += data[r][w-1]||0; });
+  return t;
+}
+
+function buildReqChart(region) {
+  const isAll = region === 'all';
+  const sel = isAll ? REQ_REGIONS : [region];
+  const c26 = isAll ? '#378ADD' : REQ_COLORS[region];
+  const c25 = isAll ? '#888780' : REQ_COLORS[region];
+  const tot25 = Array.from({length:52}, (_,i) => sel.reduce((s,r) => s+(RD25[r][i]||0), 0));
+  const tot26 = Array.from({length:19}, (_,i) => sel.reduce((s,r) => s+(RD26[r][i]||0), 0));
+  const fy25total = tot25.reduce((a,b)=>a+b,0);
+  const fy26ytd = reqSumWeeks(RD26, sel, 1, 18);
+  const fy25ytd = reqSumWeeks(RD25, sel, 1, 18);
+  const pct = fy25ytd > 0 ? Math.round((fy26ytd/fy25ytd - 1)*100) : null;
+  document.getElementById('rh-fy25-total').textContent = fy25total.toLocaleString();
+  document.getElementById('rh-fy26-ytd').textContent   = fy26ytd.toLocaleString();
+  document.getElementById('rh-fy25-ytd').textContent   = fy25ytd.toLocaleString();
+  const dEl = document.getElementById('rh-ytd-delta');
+  if (pct !== null) {
+    dEl.textContent = (pct >= 0 ? '+' : '') + pct + '%';
+    dEl.style.color = pct >= 0 ? '#09ab3b' : '#ff4b4b';
+  } else { dEl.textContent = '—'; dEl.style.color = '#8a8e9b'; }
+  const ltKey = isAll ? 'all' : region;
+  document.getElementById('rh-lt25').textContent = RLT25[ltKey] ? RLT25[ltKey] + ' mo' : '—';
+  document.getElementById('rh-lt26').textContent = RLT26[ltKey] ? RLT26[ltKey] + ' mo' : '—';
+  const ctx = document.getElementById('reqChart');
+  if (reqChart) reqChart.destroy();
+  reqChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: Array.from({length:52}, (_,i) => i),
+      datasets: [
+        { label:'FY25', data:tot25, type:'line', borderColor:c25, backgroundColor:'transparent', borderWidth:1.5, borderDash:[4,3], pointRadius:0, pointHoverRadius:3, order:1 },
+        { label:'FY26', data:[...tot26,...Array(33).fill(null)], backgroundColor:c26+'cc', borderColor:c26, borderWidth:0.5, order:2 }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins: {
+        legend:{ display:false },
+        tooltip:{ callbacks:{
+          title: ctx => {
+            const i = ctx[0].dataIndex;
+            const mo = Object.entries(MONTH_STARTS).reverse().find(([k]) => i >= +k)?.[1] || 'Feb';
+            return 'FY W'+(i+1)+' · '+mo;
+          },
+          label: ctx => ctx.parsed.y !== null ? ' '+ctx.dataset.label+': '+Math.round(ctx.parsed.y) : null
+        }}
+      },
+      scales: {
+        x:{
+          ticks:{
+            autoSkip:false, maxRotation:0, font:{size:11, weight:'500'},
+            color: ctx => MONTH_STARTS[ctx.index] ? '#8a8e9b' : 'rgba(0,0,0,0)',
+            callback: (v,i) => MONTH_STARTS[i] || ''
+          },
+          grid:{
+            color: ctx => MONTH_STARTS[ctx.index] ? 'rgba(128,128,128,0.15)' : 'rgba(0,0,0,0)',
+            lineWidth:1
+          }
+        },
+        y:{ beginAtZero:true, ticks:{ stepSize:10, color:'#8a8e9b' }, grid:{ color:'rgba(128,128,128,0.08)' } }
+      }
+    }
+  });
+}
+
+function switchTab(tabName, btnEl) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btnEl.classList.add('active');
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-'+tabName).classList.add('active');
+  document.getElementById('capacityPills').style.display = tabName === 'capacity' ? 'flex' : 'none';
+  if (tabName === 'requests' && !reqChart) {
+    setTimeout(() => buildReqChart('all'), 50);
+  }
+}
 </script>
 </body>
 </html>
